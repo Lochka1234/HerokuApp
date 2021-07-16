@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <style>
+   @-webkit-keyframes animation-bg {
+        0%{background:url('/static/images/s21.jpg')center no-repeat; background-size:cover;}
+        25%{background:url('/static/images/m31.jpg')center no-repeat; background-size:cover;}
+        50%{background:url('/static/images/a51.jpg')center no-repeat; background-size:cover;}
+        75%{background:url('/static/images/s10.jpg')center no-repeat; background-size:cover;}
+        100%{background:url('/static/images/s21.jpg')center no-repeat; background-size:cover;}
+   }
+    .repeat_bg{
+        animation-name: animation-bg;
+        animation-duration:20s;
+        animation-direction: normal;
+        animation-iteration-count: infinite;
+    }
+    .repeat_bg2{
+        animation-name: animation-bg;
+        animation-duration:1s;
+        animation-iteration-count: 2;
+    }
+   .animate:active{
+       display: inline-block;
+       animation:rubberBand;
+       animation-duration: 2s
+   }
+    </style>
+
+    <div class="px-5 py-5 text-center repeat_bg" style="padding:200px">
+        <h2 class="col-lg-5 col-sm-7 col-9 col-md-5 mx-auto px-2 fw-bold" style="font-family:'Open Sans', sans-serif;">Разблокировка SAMSUNG</h2>
+        <div class="col-lg-4 col-sm-7 col-9 col-md-5 mx-auto">
+            <p class="lead mb-4" style="font-family:'Source Sans Pro', sans-serif;">Дистанционное удаление учетной записи Google или FRP(защиты от сброса настроек), связанных с вашим телефоном Samsung.</p>
+            <a href="#" class="animate btn btn-success btn-lg my-2 px-4 gap-3">Разблокировать</a>
+            <a href="#"  class="animate btn btn-outline-secondary my-2 btn-lg px-4">Поддержка</a>
+             <div class="repeat_bg2 hidden"></div>
+        </div>
+    </div>
+
+    <div class="mx-3 my-3 row">
+    <div class="col-5 bg-dark text-light" style="border-radius: 24px">
+        <h5>Как это работает?</h5>
+
+    </div>
+    </div>
+
+{% endblock %}

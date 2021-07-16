@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% from "security/_macros.html" import render_field, render_field_with_errors, render_checkbox_field %}
+{% block page_body %}
+{% block body %}
+<div class="row my-5">
+    <div class="col-sm-5 col-lg-3 col-xl-3 col-md-4 col-6 mx-auto">
+        <a href="/" class="" style=" display: flex;
+                                     align-items: center;
+                                     justify-content: center;">
+            <img class="bg-dark p-2 px-3 shadow-lg" style="border-radius:20px" src="/static/logo_im/logo.png" width="150px" alt="False">
+        </a>
+        <h1 class="text-center h2 my-4" style="font-family: 'Roboto', sans-serif;">Вход</h1>
+        <div class="well">
+            <form class="" action="{{ url_for_security('login') }}" method="post" name="login_user_form">
+               {{ login_user_form.hidden_tag() }}
+                <div class="my-2">{{ render_field_with_errors(login_user_form.email, placeholder="Email") }}</div>
+                {{ render_field_with_errors(login_user_form.password, placeholder="Пароль") }}
+                {{ render_checkbox_field(login_user_form.remember, class="my-3") }}
+                {{ render_field(login_user_form.next) }}
+                {{ render_field(login_user_form.submit, class="btn btn-success", value="Войти") }}
+            </form>
+            <p>Еще не зарегистрированы? <a href="{{ url_for('security.register') }}">Создайте аккаунт</a>.</p>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+{% endblock %}

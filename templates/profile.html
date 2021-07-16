@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block body %}
+{% block profile_nav %}
+    <style>
+    .animate:active{
+        display: inline-block;
+        animation:rubberBand;
+        animation-duration: 2s
+    }
+     .animate{
+         display: inline-block;
+         color: #212529
+    }
+     .animate:hover{
+        display: inline-block;
+        color: darkgray ;
+    }
+     .animate:focus{
+         display: inline-block;
+         color: #0d8616;
+     }
+    </style>
+    <div class="container-fluid" style="background: #e3e3e3;">
+        <a class="animate text-decoration-none h5 my-2 mx-3" href="{{ url_for('userinfo') }}"><i class="bi bi-person-fill" style="font-size: 2rem"></i>
+            Профиль</a>
+        <a class="animate text-decoration-none h5 my-2 mx-3" href="{{ url_for('userhistory') }}"><i class="bi bi-stack" style="font-size: 2rem"></i>
+            История</a>
+    </div>
+    <div class="container-fluid my-3">
+        {% block profile_body %}
+            <h1>Тут будет информация о пользователе</h1>
+        {% endblock %}
+    </div>
+{% endblock %}
+{% endblock %}

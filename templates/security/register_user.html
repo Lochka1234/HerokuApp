@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% from "security/_macros.html" import render_field_with_errors, render_field %}
+{% block page_body %}
+    {% block body %}
+        <div class="row-fluid">
+            <div class="col-sm-3 mx-auto my-5">
+                <a href="/" class="" style=" display: flex;
+    align-items: center;
+    justify-content: center;">
+            <img class="bg-dark p-2 px-3 shadow-lg" style="border-radius:20px" src="/static/logo_im/logo.png" width="150px" alt="False">
+        </a>
+                <h1 class="text-center h2 my-4" style="font-family: 'Roboto', sans-serif;">Регистрация</h1>
+                <div class="well">
+                    <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
+                        {{ register_user_form.hidden_tag() }}
+                        <div class="mb-2">{{ render_field_with_errors(register_user_form.first_name, placeholder="Имя") }}</div>
+                        <div class="mb-2">{{ render_field_with_errors(register_user_form.email,placeholder="Email") }}</div>
+                        <div class="mb-2">{{ render_field_with_errors(register_user_form.phone_number, placeholder="Номер") }}</div>
+                        <div class="mb-2">{{ render_field_with_errors(register_user_form.password, placeholder="Пароль") }}</div>
+                        {% if register_user_form.password_confirm %}
+                        {{ render_field_with_errors(register_user_form.password_confirm,placeholder="Повторите пароль") }}
+                        {% endif %}
+                        <div class="mt-3">{{ render_field(register_user_form.submit, class="btn btn-success", value="Зарегистрироваться") }}</div>
+                    </form>
+                    <p>Уже зарегистрированы?  <a href="{{ url_for('security.login') }}">Войти</a>.</p>
+                </div>
+            </div>
+        </div>
+    {% endblock body %}
+{% endblock page_body %}
+
+© 2021 GitHub, Inc.
