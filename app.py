@@ -157,7 +157,3 @@ def delete_user(id):
         return fl.redirect(fl.url_for('index'))
     else:
         return fl.render_template('userprofile/userinfo.html', error="Ищи себя в прошмандовках Санкт-Петербурга")
-
-
-if __name__ == '__main__':
-    app.run()
