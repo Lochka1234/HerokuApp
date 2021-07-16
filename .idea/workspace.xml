@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3290b26a-6038-4f8c-a88d-f844b4adb5b3" name="Default Changelist" comment="add project">
+    <list default="true" id="3290b26a-6038-4f8c-a88d-f844b4adb5b3" name="Default Changelist" comment="add wsgi.py and Proc file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +120,7 @@
       <workItem from="1626372946416" duration="7587000" />
       <workItem from="1626444303058" duration="3460000" />
       <workItem from="1626438077562" duration="605000" />
-      <workItem from="1626439380944" duration="1883000" />
+      <workItem from="1626439380944" duration="6360000" />
     </task>
     <task id="LOCAL-00001" summary="add project">
       <created>1626436929909</created>
@@ -128,7 +129,21 @@
       <option name="project" value="LOCAL" />
       <updated>1626436929909</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add wsgi.py and Proc file">
+      <created>1626441340816</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1626441340816</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add wsgi.py and Proc file">
+      <created>1626441387737</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1626441387737</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,10 +163,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add project" />
-    <option name="LAST_COMMIT_MESSAGE" value="add project" />
+    <MESSAGE value="add wsgi.py and Proc file" />
+    <option name="LAST_COMMIT_MESSAGE" value="add wsgi.py and Proc file" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/flaskProjectshop2_0$flaskProjectshop2_0.coverage" NAME="flaskProjectshop2.0 Coverage Results" MODIFIED="1626439693434" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/flaskProjectshop2_0$wsgi.coverage" NAME="wsgi Coverage Results" MODIFIED="1626439750698" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/flaskProjectshop2_0$wsgi.coverage" NAME="wsgi Coverage Results" MODIFIED="1626447630649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

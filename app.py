@@ -6,6 +6,7 @@ from flask_login import current_user
 import wtforms as wtf
 from wtforms.fields.html5 import TelField
 
+
 app = fl.Flask(__name__)
 
 
