@@ -111,6 +111,11 @@ def index():
     return fl.render_template("index.html")
 
 
+@app.route('/terms')
+def terms():
+    return fl.render_template("terms.html")
+
+
 @app.route('/profile')
 @app.route('/profile/')
 @login_required
@@ -122,7 +127,9 @@ def profile():
 @login_required
 def userinfo():
     if fl.request.method == 'POST':
-        current_user.first_name = fl.request.form.get('name')
+        user = user_datastore.get_user(current_user.get_id())
+        user.first_name = fl.request.form.get('name')
+        db.session.commit()
     return fl.render_template('userprofile/userinfo.html')
 
 
@@ -130,7 +137,9 @@ def userinfo():
 @login_required
 def email_edit():
     if fl.request.method == 'POST':
-        current_user.first_name = fl.request.form.get('email')
+        user = user_datastore.get_user(current_user.get_id())
+        user.email = fl.request.form.get('email')
+        db.session.commit()
     return fl.render_template('userprofile/userinfo.html')
 
 
@@ -138,7 +147,9 @@ def email_edit():
 @login_required
 def phone_edit():
     if fl.request.method == 'POST':
-        current_user.phone_number = fl.request.form.get('phone_number')
+        user = user_datastore.get_user(current_user.get_id())
+        user.phone_number = fl.request.form.get('phone_number')
+        db.session.commit()
     return fl.render_template('userprofile/userinfo.html')
 
 
