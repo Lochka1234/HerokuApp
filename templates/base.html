@@ -77,8 +77,8 @@
                     }
                 </style>
                 <ul class="navbar navbar-dark bg-dark navbar-right px-3 mb-4 text-OpenSans">
-                    <li class="nav-item"><a class="focusbtn me-3 py-2 text-decoration-none px-2" href="/">Главное</a></li>
-                    <li class="nav-item"><a class="focusbtn me-3 py-2 text-decoration-none px-2" href="price">Цены</a></li>
+                    <li class="nav-item"><a class="focusbtn me-3 py-2 text-decoration-none px-2" href="{{ url_for('index') }}">Главное</a></li>
+                    <li class="nav-item"><a class="focusbtn me-3 py-2 text-decoration-none px-2" href="{{ url_for('price') }}">Цены</a></li>
                     <li class="nav-item"><a class="focusbtn me-3 py-2 text-decoration-none px-2" href="about">О нас</a></li>
                     {% if not current_user.is_authenticated %}
                     <li class="nav-item"><a class="focusbtn me-3 py-2 text-decoration-none px-2" href="{{ url_for("security.login") }}">Войти</a></li>

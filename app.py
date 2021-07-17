@@ -1,7 +1,7 @@
 import flask as fl
 import flask_sqlalchemy as sql
 import flask_security as fls
-from flask_security import login_required
+from flask_security import login_required, roles_required
 from flask_login import current_user
 import wtforms as wtf
 from wtforms.fields.html5 import TelField
@@ -114,6 +114,19 @@ def index():
 @app.route('/terms')
 def terms():
     return fl.render_template("terms.html")
+
+
+@app.route('/profile/admin')
+@login_required
+@roles_required('admin')
+def admin():
+    return fl.render_template("userprofile/admin.html")
+
+
+@app.route('/price')
+def price():
+    item = Item.query.order_by(Item.price).all()
+    return fl.render_template("price.html", item_data=item)
 
 
 @app.route('/profile')

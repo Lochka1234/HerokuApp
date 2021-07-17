@@ -25,6 +25,10 @@
             Профиль</a>
         <a class="animate text-decoration-none h5 my-2 mx-3" href="{{ url_for('userhistory') }}"><i class="bi bi-stack" style="font-size: 2rem"></i>
             История</a>
+       {% if current_user.has_role('admin') %}
+            <a class="animate text-decoration-none h5 my-2 mx-3" href="{{ url_for('admin') }}"><i class="bi bi-stack" style="font-size: 2rem"></i>
+            Управление</a>
+       {% endif %}
     </div>
     <div class="container-fluid my-3">
         {% block profile_body %}
