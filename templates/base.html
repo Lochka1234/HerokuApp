@@ -84,6 +84,13 @@
                     .active_button{
                         color: darkgray;
                     }
+                    .active_button:hover{
+                        display: inline-block;
+                        color: #00df7f;
+                    }
+                    div::before{
+                        pointer-events: none;
+                    }
                 </style>
                 <ul class="navbar navbar-dark d-none d-md-flex bg-dark navbar-right px-3 mb-4 text-OpenSans">
                     <li class="nav-item"><a class="focusbtn me-3 py-2 text-decoration-none px-2" href="{{ url_for('index') }}">Главное</a></li>
