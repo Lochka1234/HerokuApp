@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3290b26a-6038-4f8c-a88d-f844b4adb5b3" name="Default Changelist" comment="Mobile frendly">
-      <change afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/about.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/userprofile/admin/item_admin.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/userprofile/admin/users_admin.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/application.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/userprofile/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/userprofile/admin.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +18,7 @@
         <option value="Flask Main" />
         <option value="CSS File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -132,7 +129,7 @@
       <workItem from="1626456288177" duration="21265000" />
       <workItem from="1626536764518" duration="800000" />
       <workItem from="1626597845392" duration="40000" />
-      <workItem from="1626797636304" duration="8924000" />
+      <workItem from="1626797636304" duration="10557000" />
     </task>
     <task id="LOCAL-00001" summary="add project">
       <created>1626436929909</created>
@@ -190,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626597860893</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Mobile frendly">
+      <created>1626807659919</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1626807659919</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,6 +223,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/flaskProjectshop2_0$flaskProjectshop2_0.coverage" NAME="flaskProjectshop2.0 Coverage Results" MODIFIED="1626439693434" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/flaskProjectshop2_0$wsgi.coverage" NAME="wsgi Coverage Results" MODIFIED="1626806091278" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/flaskProjectshop2_0$wsgi.coverage" NAME="wsgi Coverage Results" MODIFIED="1626809013318" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
