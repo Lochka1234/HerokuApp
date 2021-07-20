@@ -123,10 +123,29 @@ def admin():
     return fl.render_template("userprofile/admin.html")
 
 
+@app.route('/profile/admin/<name>')
+@login_required
+@roles_required('admin')
+def admin_page(name):
+    if name == 'users':
+        return fl.render_template('userprofile/admin/users_admin.html')
+    if name == 'items':
+        return fl.render_template('userprofile/admin/item_admin.html')
+    if name == '?':
+        pass
+    else:
+        fl.redirect('/')
+
+
 @app.route('/price')
 def price():
     item = Item.query.order_by(Item.price).all()
     return fl.render_template("price.html", item_data=item)
+
+
+@app.route('/about')
+def about():
+    return fl.render_template("about.html")
 
 
 @app.route('/profile')

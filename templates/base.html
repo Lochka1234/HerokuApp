@@ -4,7 +4,7 @@
     {% block head %}
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" href="/static/css/forabtn.css">
+        <link rel="stylesheet" href="/static/css/style.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -15,144 +15,66 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
-        <style>
-        .text-OpenSans{
-            font-family: 'Open Sans', sans-serif;
-        }
-        </style>
-    {% block title %}<title>Test</title>{% endblock title %}
+    {% block title %}<title>TOPUNLOCK</title>{% endblock title %}
     {% endblock %}
 </head>
 <body>
 {% block page_body %}
     <div class="container-fluid p-0">
     {% block navigate %}
-         <nav class="header navbar navbar-expand navbar-expand-md navbar-expand-sm navbar-expand navbar-dark bg-dark mb-2 py-2" style="" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#admin-navbar-collapse"
-                    aria-controls="admin-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!-- navbar content -->
-            <div class="collapse navbar-collapse" id="admin-navbar-collapse">
-            {% block brand %}
-                 <style>
-                    .logoanim{
-                        animation:backInLeft;
-                        animation-duration: 1s
+        <script type="text/javascript">
+            $('document').ready(function() {
+                $('nav a').each(function() {
+                    if ('http://127.0.0.1:5000'+$(this).attr('href') === window.location.href)
+                    {
+                        $(this).addClass('active');
                     }
-                </style>
-                <a href="/" class="logoanim d-flex align-items-center text-decoration-none navbar-brand mb-4 mx-3">
+                });
+            });
+        </script>
+        <nav class="header navbar navbar-expand-lg navbar-dark bg-dark pt-3 py-3">
+            <div class="container-fluid">
+                <a href="/" class="logo d-flex align-items-center text-decoration-none navbar-brand mb-4 mx-3">
                     <img class="p-2 px-3 shadow-lg" style="background: black;border-radius:20px" src="/static/logo_im/logo.png" width="150px" alt="False">
                 </a>
-            {% endblock %}
+                <button class="navbar-toggler" style="border:none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="bi bi-menu-button-wide" style="font-size: 2rem"></i>
+                </button>
+                <div class="collapse navbar-collapse h5 py-3" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{ url_for('index') }}">Главная</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('price') }}">Цены</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('about') }}">О нас</a>
+                        </li>
+                        {% if not current_user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('security.login') }}">Войти</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {% if current_user.first_name -%}
+                                    {{ current_user.first_name }}
+                                {% else -%}
+                                    {{ current_user.email }}
+                                {%- endif %}
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu shadow-lg col-3" style="border-radius: 15px" aria-labelledby="navbarDropdown">
+                                <li class="p-2"><a style="border-radius: 10px" class="dropdown-item h5" href="{{ url_for('userinfo') }}">Профиль</a></li>
+                                <li><a class="dropdown-divider h5"></li>
+                                <li class="p-2" ><a style="border-radius: 10px" class="dropdown-item h5" href="{{ url_for('security.logout') }}">Выйти</a></li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-            <style>
-                .header::after {
-                    content: '';
-                    display: block;
-                    width: 100%;
-                    height: 24px;
-                    border-radius: 24px 24px 0 0;
-                    background: #fff;
-                    position: absolute;
-                    bottom: -1px;
-                    left: 0;
-                }
-            </style>
-
-            {% block nav_link %}
-                <style>
-                    .focusbtn:hover:not(.activeаааа){
-                        color: #00df7f;
-                        background: #212529;
-                    }
-                    .focusbtn{
-                        color: #b9b9b9; border-color: #00df7f;
-                    }
-                    .focusbtn:active{
-                        display: inline-block;
-                        animation:rubberBand;
-                        animation-duration: 2s
-                    }
-                    .active_button:active{
-                        display: inline-block;
-                        animation:rubberBand;
-                        animation-duration: 2s;
-                        color: #00df7f;
-                    }
-                    .active_button{
-                        color: darkgray;
-                    }
-                    .active_button:hover{
-                        display: inline-block;
-                        color: #00df7f;
-                    }
-                    div::before{
-                        pointer-events: none;
-                    }
-                </style>
-                <ul class="navbar navbar-dark d-none d-md-flex bg-dark navbar-right px-3 mb-4 text-OpenSans">
-                    <li class="nav-item"><a class="focusbtn me-3 py-2 text-decoration-none px-2" href="{{ url_for('index') }}">Главное</a></li>
-                    <li class="nav-item"><a class="focusbtn me-3 py-2 text-decoration-none px-2" href="{{ url_for('price') }}">Цены</a></li>
-                    <li class="nav-item"><a class="focusbtn me-3 py-2 text-decoration-none px-2" href="about">О нас</a></li>
-                    {% if not current_user.is_authenticated %}
-                    <li class="nav-item"><a class="focusbtn me-3 py-2 text-decoration-none px-2" href="{{ url_for("security.login") }}">Войти</a></li>
-                    {% else %}
-                    {% if current_user.is_authenticated %}
-                    <div class="dropdown">
-                        <a href="#" class="text-decoration-none focusbtn dropdown-toggle" role="button" style="box-shadow: none" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle" style="font-size: 1.5rem"></i>
-                            {% if current_user.first_name -%}
-                                {{ current_user.first_name }}
-                            {% else -%}
-                                {{ current_user.email }}
-                            {%- endif %}<span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu bg-dark dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                            <li class="bg-dark"><a class="dropdown-item focusbtn" href="{{ url_for('userinfo') }}">Профиль</a></li>
-                            <li class="bg-dark"><a class="dropdown-item focusbtn" href="{{ url_for('security.logout') }}">Выйти</a></li>
-                        </ul>
-                    </div>
-                    {% endif %}
-                    {% endif %}
-                </ul>
-                <ul class="navbar navbar-dark d-flex d-md-none bg-dark navbar-right px-3 mb-4 text-OpenSans">
-                    <a class="text-decoration-none d-flex focusbtn" style="color: #b9b9b9;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i style="font-size: 2rem" class="bi bi-menu-button-wide"></i><h5 class="mx-2 my-auto">Меню</h5></a>
-                    <div class="offcanvas offcanvas-end" style="background:rgba(0,0,0,0.70);" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-                        <div class="offcanvas-header">
-                            <h5 id="offcanvasRightLabel" class="text-light me-3 px-2 h1">Меню</h5>
-                            <button type="button" class="btn-close text-reset bg-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                        </div>
-                        <div class="offcanvas-body">
-                            <li class="nav-item my-4 h2"><a class="active_button me-3 py-2 text-decoration-none px-2" href="{{ url_for('index') }}">Главное</a></li>
-                            <li class="nav-item my-4 h2"><a class="active_button me-3 py-2 text-decoration-none px-2" href="{{ url_for('price') }}">Цены</a></li>
-                            <li class="nav-item my-4 h2"><a class="active_button me-3 py-2 text-decoration-none px-2" href="about">О нас</a></li>
-                            {% if not current_user.is_authenticated %}
-                                <li class="nav-item my-4 h2"><a class="active_button me-3 py-2 text-decoration-none px-2" href="{{ url_for("security.login") }}">Войти</a></li>
-                            {% else %}
-                                {% if current_user.is_authenticated %}
-                                    <div class="dropdown my-4 h2">
-                                        <a href="#" class="active_button text-decoration-none dropdown-toggle" role="button" style="box-shadow: none" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="bi bi-person-circle" style="font-size: 1.5rem"></i>
-                                            {% if current_user.first_name -%}
-                                                {{ current_user.first_name }}
-                                            {% else -%}
-                                                {{ current_user.email }}
-                                            {%- endif %}
-                                            <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu bg-dark dropdown-menu-start" aria-labelledby="dropdownMenuButton">
-                                            <li class="bg-dark h3"><a class="dropdown-item focusbtn" href="{{ url_for('userinfo') }}">Профиль</a></li>
-                                            <li class="bg-dark h3"><a class="dropdown-item focusbtn" href="{{ url_for('security.logout') }}">Выйти</a></li>
-                                        </ul>
-                                    </div>
-                                {% endif %}
-                            {% endif %}
-                        </div>
-                    </div>
-                </ul>
-            {% endblock %}
         </nav>
     {% endblock %}
     </div>

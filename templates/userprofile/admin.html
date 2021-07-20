@@ -1,5 +1,11 @@
 {% extends "profile.html" %}
 
 {% block profile_body %}
-    <h1>Тут будет админка</h1>
+    <nav class="navbar navbar-light" style="border-radius: 15px 15px 0px 0px ">
+       <div class="m-2 text-decoration-none">
+           <a class="nav-item mx-2" href="/profile/admin/users">Пользователи</a>
+           <a class="nav-item" href="/profile/admin/items">Товары</a>
+       </div>
+    </nav>
+    {% block admin_body %}{% endblock %}
 {% endblock %}
