@@ -26,7 +26,7 @@
         <script type="text/javascript">
             $('document').ready(function() {
                 $('nav a').each(function() {
-                    if ('https://topunlock.herokuapp.com'+$(this).attr('href') === window.location.href)
+                    if (window.location.protocol.toString()+'//'+window.location.host.toString()+$(this).attr('href') === window.location.href)
                     {
                         $(this).addClass('active');
                     }
@@ -38,10 +38,10 @@
                 <a href="/" class="logo d-flex align-items-center text-decoration-none navbar-brand mb-4 mx-3">
                     <img class="p-2 px-3 shadow-lg" style="background: black;border-radius:20px" src="/static/logo_im/logo.png" width="150px" alt="False">
                 </a>
-                <button class="navbar-toggler" style="border:none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler mb-4" style="border:none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="bi bi-menu-button-wide" style="font-size: 2rem"></i>
                 </button>
-                <div class="collapse navbar-collapse h5 py-3" id="navbarNav">
+                <div class="collapse navbar-collapse h5 mx-3 py-3" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{{ url_for('index') }}">Главная</a>
@@ -87,30 +87,18 @@
     </div>
 
     {% block footer  %}
-    <style>
-    .footer{
-        position: relative;
-        padding: 15px 0 15px;
-    }
-    .footer:before{
-        content:'';
-        display: block;
-        background: white;
-        border-radius: 0 0 24px 24px;
-        width: 100%;
-        position: absolute;
-        height: 24px;
-        top: -1px;
-    }
-    </style>
-
     <div class="footer bg-dark text-center text-OpenSans">
-        <div class="d-flex flex-row justify-content-center mt-5 mb-2">
-            <a href="https://t.me/joinchat/L51FVHV8IxY0YTcy" style="color: white" class="text-decoration-none mx-3 h5">Telegram:<br><i class="bi bi-telegram" style="font-size: 2rem;"></i></a>
-            <a href="https://api.whatsapp.com/resolve/?deeplink=%2F%253Cnumber%253E" style="color: white" class="text-decoration-none mx-3 h5">WhatsApp:<br><i class="bi bi-whatsapp" style="font-size: 2rem;"></i></a>
-            <a href="tel:+380985554433" style="color: white" class="text-decoration-none mx-3 h5">Номер телефона:<br><p class="my-2" style="color: aqua">+79xx-xxx-xxxx</p></a>
-            <a href='{{ url_for('terms') }}' style="color: white" class="text-decoration-none mx-3 h5">Пользовательское соглашение:<br><i class="bi bi-journal-text" style="font-size: 2rem"></i></a>
-        </div>
+       <div class="container">
+            <div class="row mt-5 mb-2">
+                <div class="col-4"><a href="https://t.me/joinchat/L51FVHV8IxY0YTcy" style="color: white" class="text-decoration-none h5">Telegram:<br><i class="bi bi-telegram" style="font-size: 2rem;"></i></a></div>
+                <div class="col-4"><a href="https://api.whatsapp.com/resolve/?deeplink=%2F%253Cnumber%253E" style="color: white" class="col-4 text-decoration-none h5">WhatsApp:<br><i class="bi bi-whatsapp" style="font-size: 2rem;"></i></a></div>
+                <div class="col-4"><a href="tel:+380985554433" style="color: white" class="col-4 text-decoration-none h5">Номер телефона:<br><p class="my-2" style="color: aqua">+79xx-xxx-xxxx</p></a></div>
+            </div>
+           <div class="text-light mt-3">
+               <p>Все сторонние бренды и логотипы являются зарегистрированными товарными знаками их уважаемых владельцев. Этот веб-сайт не является аффилированным лицом и не является частью каких-либо сетевых операторов / производителей мобильных телефонов, указанных на нашем веб-сайте.</p>
+               <div class="col-4 mx-auto"><a href='{{ url_for('terms') }}' style="color: white" class="col-4 text-decoration-none h5">Пользовательское соглашение: <i class="bi bi-journal-text" style="font-size: 1.8rem"></i></a></div>
+           </div>
+       </div>
     </div>
 
 {% endblock footer %}

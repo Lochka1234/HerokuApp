@@ -11,6 +11,20 @@
     position: absolute;
     bottom: -1px;
 }
+ .footer{
+     position: relative;
+     padding: 15px 0 15px;
+ }
+.footer:before{
+    content:'';
+    display: block;
+    background: white;
+    border-radius: 0 0 24px 24px;
+    width: 100%;
+    position: absolute;
+    height: 24px;
+    top: -1px;
+}
 .logo{
     animation:backInLeft;
     animation-duration: 1s
