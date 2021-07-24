@@ -25,7 +25,7 @@
     {% block navigate %}
         <script type="text/javascript">
             $('document').ready(function() {
-                $('nav a').each(function() {
+                $('nav ul a').each(function() {
                     if (window.location.protocol.toString()+'//'+window.location.host.toString()+$(this).attr('href') === window.location.href)
                     {
                         $(this).addClass('active');
@@ -33,7 +33,7 @@
                 });
             });
         </script>
-        <nav class="header navbar navbar-expand-lg navbar-dark bg-dark pt-3 py-3">
+        <nav class="header navbar navbar-expand-md navbar-dark bg-dark pt-3 py-3">
             <div class="container-fluid">
                 <a href="/" class="logo d-flex align-items-center text-decoration-none navbar-brand mb-4 mx-3">
                     <img class="p-2 px-3 shadow-lg" style="background: black;border-radius:20px" src="/static/logo_im/logo.png" width="150px" alt="False">
@@ -42,17 +42,20 @@
                     <i class="bi bi-menu-button-wide" style="font-size: 2rem"></i>
                 </button>
                 <div class="collapse navbar-collapse h5 mx-3 py-3" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto h4 ">
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{{ url_for('index') }}">Главная</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('price') }}">Цены</a>
+                            <a class="nav-link" href="{{ url_for('price') }}">Услуги</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('about') }}">О нас</a>
                         </li>
                         {% if not current_user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('security.register') }}">Регистрация</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('security.login') }}">Войти</a>
                         </li>
@@ -66,7 +69,7 @@
                                 {%- endif %}
                                 <span class="caret"></span>
                             </a>
-                            <ul class="dropdown-menu shadow-lg col-3" style="border-radius: 15px" aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu dropdown-menu-end shadow-lg col-3" style="border-radius: 15px" aria-labelledby="navbarDropdown">
                                 <li class="p-2"><a style="border-radius: 10px" class="dropdown-item h5" href="{{ url_for('userinfo') }}">Профиль</a></li>
                                 <li><a class="dropdown-divider h5"></li>
                                 <li class="p-2" ><a style="border-radius: 10px" class="dropdown-item h5" href="{{ url_for('security.logout') }}">Выйти</a></li>

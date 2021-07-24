@@ -13,8 +13,16 @@
         <div class="well">
             <form class="" action="{{ url_for_security('login') }}" method="post" name="login_user_form">
                {{ login_user_form.hidden_tag() }}
-                <div class="my-2">{{ render_field_with_errors(login_user_form.email, placeholder="Email") }}</div>
-                {{ render_field_with_errors(login_user_form.password, placeholder="Пароль") }}
+                <div class="my-2">
+                    <div class="form-floating mb-3">
+                        {{ render_field_with_errors(login_user_form.email, id="floatingInput",  placeholder="Email") }}
+                        <label for="floatingInput">Email</label>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    {{ render_field_with_errors(login_user_form.password, id="floatingPassword" , placeholder="Пароль") }}
+                    <label for="floatingPassword">Пароль</label>
+                </div>
                 {{ render_checkbox_field(login_user_form.remember, class="my-3") }}
                 {{ render_field(login_user_form.next) }}
                 {{ render_field(login_user_form.submit, class="btn btn-success", value="Войти") }}

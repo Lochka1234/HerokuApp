@@ -1,5 +1,95 @@
 {% extends "base.html" %}
 
 {% block body %}
+    <script type="application/javascript">
+        function myFunction() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("mySearch");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("MyMenu");
+            li = ul.getElementsByTagName("tr");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("td")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 
+    <style>
+    /* Styles for wrapping the search box */
+
+.main {
+    width: 50%;
+    margin: 50px auto;
+}
+
+/* Bootstrap 4 text input with search icon */
+
+.has-search .form-control {
+    padding: 13px ;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+    </style>
+    <div class="main">
+        <div class="form-group has-search">
+            <span class="fa fa-search form-control-feedback"></span>
+            <input type="text" id="mySearch" onkeyup="myFunction()" class="form-control" placeholder="Поиск">
+        </div>
+    </div>
+
+     <div class="col-10 col-6-md mx-auto" style="border-radius: 15px;border: 2px solid #d5d5d5; margin-bottom:10%">
+        <table class="table table-hover mb-0">
+            <thead>
+            <tr>
+                <th scope="col">Имя</th>
+                <th class="text-center" scope="col">Описание</th>
+                <th class="text-center" scope="col">Цена</th>
+                <th class="text-center" scope="col"></th>
+            </tr>
+            </thead>
+            <tbody id="MyMenu">
+            {% for el in data %}
+                <tr>
+                    <td >{{ el.name }}</td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-light shadow" data-bs-toggle="modal" data-bs-target="#exampleModalToggle{{ el.id }}" data-bs-whatever="{{ el.intro }}">
+                            <i class="bi bi-info-lg"></i>
+                        </button>
+                    </td>
+                     <div class="modal fade" id="exampleModalToggle{{ el.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                         <div class="modal-dialog">
+                             <div class="modal-content">
+                                 <div class="modal-header">
+                                     <h5 class="modal-title" id="exampleModalLabel">Сервисная информация</h5>
+                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                 </div>
+                                 <div class="modal-body" id="recipient-name">
+                                     <h4>Описание</h4>
+                                     <p class="text">{{ el.intro }}</p>
+                                 </div>
+                                 <div class="modal-footer"></div>
+                             </div>
+                         </div>
+                     </div>
+                    <td class="text-center" >{{ el.price }} Руб.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

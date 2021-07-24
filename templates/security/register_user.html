@@ -13,10 +13,22 @@
                 <div class="well">
                     <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
                         {{ register_user_form.hidden_tag() }}
-                        <div class="mb-2">{{ render_field_with_errors(register_user_form.first_name, placeholder="Имя") }}</div>
-                        <div class="mb-2">{{ render_field_with_errors(register_user_form.email,placeholder="Email") }}</div>
-                        <div class="mb-2">{{ render_field_with_errors(register_user_form.phone_number, placeholder="Номер") }}</div>
-                        <div class="mb-2">{{ render_field_with_errors(register_user_form.password, placeholder="Пароль") }}</div>
+                        <div class="form-floating mb-3">
+                            {{ render_field_with_errors(register_user_form.first_name, id="floatingName",placeholder="Имя") }}
+                            <label for="floatingName">Имя</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{ render_field_with_errors(register_user_form.email, id="floatingEmail" ,placeholder="Email") }}
+                            <label for="floatingEmail">Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{ render_field_with_errors(register_user_form.phone_number, id="floatingPhone" , placeholder="Номер") }}
+                            <label for="floatingPhone">Номер тел.</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{ render_field_with_errors(register_user_form.password, id="floatingPassword" ,placeholder="Пароль") }}
+                            <label for="floatingPassword">Пароль</label>
+                        </div>
                         {% if register_user_form.password_confirm %}
                         {{ render_field_with_errors(register_user_form.password_confirm,placeholder="Повторите пароль") }}
                         {% endif %}

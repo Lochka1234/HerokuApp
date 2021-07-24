@@ -1,5 +1,37 @@
 {% extends 'userprofile/admin.html' %}
 
 {% block admin_body %}
-
+    <div class="col m-3 col-6-lg mx-3 p-3" style="border-radius: 15px;border: 2px solid #d5d5d5; ">
+     <table class="table table-hover ">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Имя</th>
+      <th scope="col">Email</th>
+      <th scope="col">Тел.</th>
+        <th scope="col">Активность</th>
+        <th scope="col">Рег.</th>
+        <th scope="col">Роль</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for el in data %}
+      <tr>
+          <th scope="row">{{ el.id }}</th>
+          <td>{{ el.first_name }}</td>
+          <td>{{ el.email }}</td>
+          <td>{{ el.phone_number }}</td>
+          <td>{{ el.active }}</td>
+          <td>{{ el.confirmed_at }}</td>
+          <td>
+              {% for rol in el.roles %}
+                  {{ rol.name }}
+              {% endfor %}
+          </td>
+          <td><a class="btn btn-danger" href="{{ url_for('delete_user_admin', id=el.id) }}">Удалить</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+     </div>
 {% endblock %}

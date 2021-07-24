@@ -3,12 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="3290b26a-6038-4f8c-a88d-f844b4adb5b3" name="Default Changelist" comment="Mobile frendly">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/application.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/price.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/price.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/_macros.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/_macros.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/security/login_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login_user.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/security/register_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/register_user.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/userprofile/admin/item_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/userprofile/admin/item_admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/userprofile/admin/users_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/userprofile/admin/users_admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/userprofile/userinfo.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/userprofile/userinfo.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +30,17 @@
         <option value="HTML File" />
         <option value="JavaScript File" />
       </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
     </option>
   </component>
   <component name="Git.Settings">
@@ -133,7 +151,11 @@
       <workItem from="1626536764518" duration="800000" />
       <workItem from="1626597845392" duration="40000" />
       <workItem from="1626797636304" duration="12055000" />
-      <workItem from="1626852441929" duration="7614000" />
+      <workItem from="1626852441929" duration="9687000" />
+      <workItem from="1626886743146" duration="14444000" />
+      <workItem from="1626944777814" duration="4950000" />
+      <workItem from="1627030923955" duration="11823000" />
+      <workItem from="1627119701761" duration="18229000" />
     </task>
     <task id="LOCAL-00001" summary="add project">
       <created>1626436929909</created>
@@ -205,7 +227,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626809279892</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Mobile frendly">
+      <created>1626860297302</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1626860297302</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,11 +258,12 @@
     <MESSAGE value="edit adaptive design" />
     <MESSAGE value="Add price and editt index + base + add terms(maybe should edit)" />
     <MESSAGE value="----&gt;&gt;&gt;&gt;&gt;&gt;" />
+    <MESSAGE value="Mobile frendly!!!" />
     <MESSAGE value="Mobile frendly" />
     <option name="LAST_COMMIT_MESSAGE" value="Mobile frendly" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/flaskProjectshop2_0$flaskProjectshop2_0.coverage" NAME="flaskProjectshop2.0 Coverage Results" MODIFIED="1626439693434" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/flaskProjectshop2_0$wsgi.coverage" NAME="wsgi Coverage Results" MODIFIED="1626854944517" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/flaskProjectshop2_0$wsgi.coverage" NAME="wsgi Coverage Results" MODIFIED="1627138119833" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

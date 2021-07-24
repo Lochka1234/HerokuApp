@@ -6,20 +6,16 @@ from flask_login import current_user
 import wtforms as wtf
 from wtforms.fields.html5 import TelField
 
-
 app = fl.Flask(__name__)
-
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///shop.db'
 app.config['DEBUG'] = True
 app.config['FLASK_DEBUG'] = 1
 app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {"pool_pre_ping": True}
 
-
 app.config['SECURITY_PASSWORD_SALT'] = '176474375850775801120531136185633838018'
 app.config['SECRET_KEY'] = 'l4gmnDn-ifb9yaytCZgIGhDnWF6_d2tahmYgTDm1GEI'
 app.config['SECURITY_URL_PREFIX'] = '/'
-
 
 app.config['SECURITY_LOGIN_URL'] = '/login/'
 app.config['SECURITY_LOGOUT_URL'] = '/logout/'
@@ -28,16 +24,13 @@ app.config['SECURITY_POST_LOGIN_VIEW'] = '/'
 app.config['SECURITY_POST_LOGOUT_VIEW'] = '/'
 app.config['SECURITY_POST_REGISTER_VIEW'] = '/'
 
-
 app.config['SECURITY_REGISTERABLE'] = True
 app.config['SECURITY_SEND_REGISTER_EMAIL'] = False
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECURITY_MSG_INVALID_PASSWORD'] = 'Неверный пароль', 'error'
 app.config['SECURITY_MSG_USER_DOES_NOT_EXIST'] = 'Такого пользователя не существует', 'error'
 
-
 db = sql.SQLAlchemy(app)
-
 
 roles_users = db.Table(
     'roles_users',
@@ -57,6 +50,25 @@ class Role(db.Model, fls.RoleMixin):
         return hash(self.name)
 
 
+class Item(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    intro = db.Column(db.Text(), nullable=False)
+    price = db.Column(db.Integer(), nullable=False)
+
+    def __repr__(self):
+        return f'Запись:{self.name}'
+
+
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    intro = db.Column(db.Text(), nullable=False)
+    price = db.Column(db.Integer(), nullable=False)
+    order_active = db.Column(db.Boolean(), default=True)
+    user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
+
+
 class User(db.Model, fls.UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(45), default=None)
@@ -68,18 +80,13 @@ class User(db.Model, fls.UserMixin):
     roles = db.relationship('Role',
                             secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
-
-
-class Item(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    intro = db.Column(db.Text, nullable=False)
-    price = db.Column(db.Integer, nullable=False)
+    orders = db.relationship('Order')
 
 
 class ExtendedRegisterForm(fls.RegisterForm):
     first_name = wtf.StringField('first_name', [wtf.validators.DataRequired()])
-    phone_number = wtf.fields.html5.TelField('phone_number',  [wtf.validators.DataRequired(), wtf.validators.Length(min=10, max=13)])
+    phone_number = wtf.fields.html5.TelField('phone_number',
+                                             [wtf.validators.DataRequired(), wtf.validators.Length(min=10, max=13)])
 
 
 user_datastore = fls.SQLAlchemyUserDatastore(db, User, Role)
@@ -123,24 +130,63 @@ def admin():
     return fl.render_template("userprofile/admin.html")
 
 
-@app.route('/profile/admin/<name>')
+@app.route('/delete_user_admin/<id>')
+@login_required
+@roles_required('admin')
+def delete_user_admin(id):
+    user_datastore.get_user(current_user.get_id())
+    user = user_datastore.get_user(id)
+    user_datastore.delete_user(user)
+    db.session.commit()
+    return fl.redirect(fl.url_for('admin_page', name='users'))
+
+
+@app.route('/delete/<id>')
+@login_required
+@roles_required('admin')
+def delete(id):
+    Item.query.filter_by(id=id).delete()
+    db.session.commit()
+    return fl.redirect(fl.url_for('admin_page', name='items'))
+
+
+@app.route('/profile/admin/<name>', methods=['post', 'get'])
 @login_required
 @roles_required('admin')
 def admin_page(name):
     if name == 'users':
-        return fl.render_template('userprofile/admin/users_admin.html')
+        users = User.query.order_by(User.id).all()
+        return fl.render_template('userprofile/admin/users_admin.html', data=users)
+
     if name == 'items':
-        return fl.render_template('userprofile/admin/item_admin.html')
+        item = Item.query.order_by(Item.id).all()
+        return fl.render_template('userprofile/admin/item_admin.html', data=item)
+
     if name == '?':
         pass
+
     else:
-        fl.redirect('/')
+        return fl.redirect('/')
+
+
+@app.route('/profile/admin/items/add', methods=['post'])
+@login_required
+@roles_required('admin')
+def add_item():
+    if fl.request.method == 'POST':
+        name = fl.request.form.get('name')
+        price = fl.request.form.get('price')
+        intro = fl.request.form.get('intro')
+        item = Item(name=name, price=price, intro=intro)
+        db.session.add(item)
+        db.session.commit()
+        return fl.redirect(fl.url_for('admin_page', name='items'))
 
 
 @app.route('/price')
 def price():
-    item = Item.query.order_by(Item.price).all()
-    return fl.render_template("price.html", item_data=item)
+    item = Item.query.order_by(Item.id).all()
+    return fl.render_template("price.html", data=item)
 
 
 @app.route('/about')
@@ -162,6 +208,9 @@ def userinfo():
         user = user_datastore.get_user(current_user.get_id())
         user.first_name = fl.request.form.get('name')
         db.session.commit()
+
+    user = user_datastore.get_user(current_user.get_id())
+
     return fl.render_template('userprofile/userinfo.html')
 
 
