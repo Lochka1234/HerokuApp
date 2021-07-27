@@ -9,7 +9,7 @@
     }
     </style>
     <div class="row">
-    <div class="col-12 col-sm-10 col-md-7 col-lg-6 col-xl-5 ">
+    <div class="col mb-3">
         <form action="" method="post" class="p-3" style="border: 2px solid #d5d5d5; border-radius: 15px ">
         <div class="mb-4"><h5>Персональные данные</h5></div>
             <li style="border-radius: 5px; background:rgb(232, 232, 232);" class="py-2 my-2 marker-none">
@@ -60,17 +60,42 @@
                 </label>
              <button type="button" class="p-0 px-2 mx-2 btn btn-light" style="background:rgb(232, 232, 232); border: none; position: relative; float:  right" data-bs-toggle="modal" data-bs-target="#phone_numberModal"><i class="bi bi-pencil"></i></button>
             </li>
-
         </form>
     </div>
-    <div class="col" style="background: cadetblue;">
-        <div>
+    <div class="col mb-3">
+    <div style="border: 2px solid #d5d5d5; border-radius: 15px;">
+        <div class="p-2 m-2"><h5>История заказов</h5></div>
+        <div class="m-2" style="max-height: 150px;overflow: auto;display: block; position: relative;">
+            <table class="mb-0 table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Услуга</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Активность</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for el in current_user.orders %}
+                <tr>
+                    <td>{{ el.name }}</td>
+                    <td>{{ el.intro }}</td>
+                    <td>
+                        {% if el.order_active == True %}
+                            <i class="bi bi-hourglass-split" style="font-size:1.5rem ;color: rgba(0,0,0,0.41)"></i>
+                            <p class="d-inline-block">В процессе...</p>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
         </div>
+    </div>
     </div>
     </div>
 
     <div class="row">
-    <div class="col-12 col-sm-10 col-md-7 col-lg-6 col-xl-5 mt-3 " >
+    <div class="col" >
          <div class="p-3" style="border: 2px solid #d5d5d5; border-radius: 15px ">
              <h5 class="mb-3">Удаление личного кабинета</h5>
              <p>Как только Ваш Личный Кабинет будет удален, Вы автоматически выйдете из системы и больше не сможете войти в этот аккаунт.</p>
@@ -112,7 +137,7 @@
       </div>
       <div class="modal-body">
 
-          <form action="" method="post">
+          <form action="{{ url_for('name_edit') }}" method="post">
           <div class="mb-2" style="border-bottom: #b9b9b9 solid 2px "><label class="mx-2 my-4" for="name">Введите имя</label><input class="py-1" style="border-radius: 6px; border: #b9b9b9 solid; outline-color: darkgray"  id="name" type="text" name="name" placeholder="Имя:"></div>
          <div class="my-3 col-sm-5 col-8 offset-6 offset-sm-7">
              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Отмена</button>
@@ -135,7 +160,7 @@
       </div>
       <div class="modal-body">
 
-          <form action="/phone_numberModal" method="post">
+          <form action="{{ url_for('phone_edit') }}" method="post">
           <div class="mb-2" style="border-bottom: #b9b9b9 solid 2px "><label class="mx-2 my-4" for="phone_number">Введите номер</label><input class="py-1" style="border-radius: 6px; border: #b9b9b9 solid; outline-color: darkgray"  id="phone_number" type="tel" name="phone_number" placeholder="Тел:"></div>
          <div class="my-3 col-sm-5 col-8 offset-6 offset-sm-7">
              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Отмена</button>
@@ -157,15 +182,13 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
       </div>
       <div class="modal-body">
-
-          <form action="/emailModal" method="post"">
+          <form action="{{ url_for('email_edit') }}" method="post"">
           <div class="mb-2" style="border-bottom: #b9b9b9 solid 2px "><label class="mx-2 my-4" for="email">Введите Email</label><input class="py-1" style="border-radius: 6px; border: #b9b9b9 solid; outline-color: darkgray"  id="email" type="email" name="email" placeholder="Email:"></div>
          <div class="my-3 col-sm-5 col-8 offset-6 offset-sm-7">
              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Отмена</button>
              <button type="submit" class="btn btn-success">Изменить</button>
          </div>
           </form>
-
       </div>
     </div>
   </div>

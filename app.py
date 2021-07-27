@@ -68,6 +68,9 @@ class Order(db.Model):
     order_active = db.Column(db.Boolean(), default=True)
     user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
 
+    def __repr__(self):
+        return '<Post %r>' % (self.name)
+
 
 class User(db.Model, fls.UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -80,7 +83,9 @@ class User(db.Model, fls.UserMixin):
     roles = db.relationship('Role',
                             secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
-    orders = db.relationship('Order')
+
+    orders = db.relationship('Order',
+                             backref='user', lazy='dynamic')
 
 
 class ExtendedRegisterForm(fls.RegisterForm):
@@ -203,14 +208,7 @@ def profile():
 
 @app.route('/profile/your_info', methods=['post', 'get'])
 @login_required
-def userinfo():
-    if fl.request.method == 'POST':
-        user = user_datastore.get_user(current_user.get_id())
-        user.first_name = fl.request.form.get('name')
-        db.session.commit()
-
-    user = user_datastore.get_user(current_user.get_id())
-
+def user_info():
     return fl.render_template('userprofile/userinfo.html')
 
 
@@ -221,7 +219,17 @@ def email_edit():
         user = user_datastore.get_user(current_user.get_id())
         user.email = fl.request.form.get('email')
         db.session.commit()
-    return fl.render_template('userprofile/userinfo.html')
+    return fl.redirect(fl.url_for('user_info'))
+
+
+@app.route('/nameModal', methods=['post','get'])
+@login_required
+def name_edit():
+    if fl.request.method == 'POST':
+        user = user_datastore.get_user(current_user.get_id())
+        user.first_name = fl.request.form.get('name')
+        db.session.commit()
+    return fl.redirect(fl.url_for('user_info'))
 
 
 @app.route('/phone_numberModal', methods=['post', 'get'])
@@ -231,22 +239,34 @@ def phone_edit():
         user = user_datastore.get_user(current_user.get_id())
         user.phone_number = fl.request.form.get('phone_number')
         db.session.commit()
-    return fl.render_template('userprofile/userinfo.html')
+    return fl.redirect(fl.url_for('user_info'))
 
 
 @app.route('/profile/your_history')
 @login_required
-def userhistory():
+def user_history():
     return fl.render_template('userprofile/userhistory.html')
 
 
 @app.route('/delete_user/<id>')
 def delete_user(id):
     if id == current_user.get_id():
-        user_datastore.get_user(current_user.get_id())
-        user = user_datastore.get_user(id)
+        user = user_datastore.get_user(current_user.get_id())
         user_datastore.delete_user(user)
         db.session.commit()
         return fl.redirect(fl.url_for('index'))
     else:
         return fl.render_template('userprofile/userinfo.html', error="Ищи себя в прошмандовках Санкт-Петербурга")
+
+
+@app.route('/price/buy/<id>')
+@login_required
+def buy_item(id):
+    if current_user.is_authenticated:
+        user = user_datastore.get_user(current_user.get_id())
+        item = Item.query.get(id)
+        order = Order(name=item.name, intro=item.intro, price=item.price, user=user)
+        db.session.add(order)
+        db.session.commit()
+        return fl.redirect(fl.url_for('user_info'))
+

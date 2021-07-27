@@ -59,7 +59,6 @@
                 <th scope="col">Имя</th>
                 <th class="text-center" scope="col">Описание</th>
                 <th class="text-center" scope="col">Цена</th>
-                <th class="text-center" scope="col"></th>
             </tr>
             </thead>
             <tbody id="MyMenu">
@@ -87,6 +86,7 @@
                          </div>
                      </div>
                     <td class="text-center" >{{ el.price }} Руб.</td>
+                    <td class="text-center"><a href="{{ url_for('buy_item', id=el.id) }}">Купить</a></td>
                 </tr>
             {% endfor %}
             </tbody>

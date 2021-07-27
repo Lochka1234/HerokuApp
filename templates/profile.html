@@ -21,9 +21,9 @@
      }
     </style>
     <div class="container-fluid" style="background: #e3e3e3;">
-        <a class="animate text-decoration-none h5 my-2 mx-3" href="{{ url_for('userinfo') }}"><i class="bi bi-person-fill" style="font-size: 2rem"></i>
+        <a class="animate text-decoration-none h5 my-2 mx-3" href="{{ url_for('user_info') }}"><i class="bi bi-person-fill" style="font-size: 2rem"></i>
             Профиль</a>
-        <a class="animate text-decoration-none h5 my-2 mx-3" href="{{ url_for('userhistory') }}"><i class="bi bi-stack" style="font-size: 2rem"></i>
+        <a class="animate text-decoration-none h5 my-2 mx-3" href="{{ url_for('user_history') }}"><i class="bi bi-stack" style="font-size: 2rem"></i>
             История</a>
        {% if current_user.has_role('admin') %}
             <a class="animate text-decoration-none h5 my-2 mx-3" href="{{ url_for('admin') }}"><i class="bi bi-terminal" style="font-size: 2rem"></i>
