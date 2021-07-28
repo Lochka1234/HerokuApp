@@ -51,14 +51,15 @@
             <input type="text" id="mySearch" onkeyup="myFunction()" class="form-control" placeholder="Поиск">
         </div>
     </div>
-
-     <div class="col-10 col-6-md mx-auto" style="border-radius: 15px;border: 2px solid #d5d5d5; margin-bottom:10%">
+    <div class="p-3">
+     <div class="mx-auto col-lg-10" style="border-radius: 15px;border: 2px solid #d5d5d5; margin-bottom:10%">
         <table class="table table-hover mb-0">
             <thead>
             <tr>
                 <th scope="col">Имя</th>
                 <th class="text-center" scope="col">Описание</th>
                 <th class="text-center" scope="col">Цена</th>
+                <th></th>
             </tr>
             </thead>
             <tbody id="MyMenu">
@@ -86,10 +87,11 @@
                          </div>
                      </div>
                     <td class="text-center" >{{ el.price }} Руб.</td>
-                    <td class="text-center"><a href="{{ url_for('buy_item', id=el.id) }}">Купить</a></td>
+                    <td class="text-center"><a class="btn btn-outline-primary" href="{{ url_for('buy_item', id=el.id) }}">Купить</a></td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
+    </div>
     </div>
 {% endblock %}

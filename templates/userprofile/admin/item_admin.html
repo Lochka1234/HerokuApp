@@ -1,36 +1,96 @@
 {% extends 'userprofile/admin.html' %}
 
 {% block admin_body %}
-<div class="row">
-    <form action="{{ url_for('add_item') }}" class="col-auto m-3 p-4" style="border: 2px solid #d5d5d5; border-radius: 15px" method="post">
-        <h4 class="m-2 mb-4">Добавить товар</h4>
-        <input type="text" class="form-control my-2" name="name" placeholder="Имя" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-        <input type="number" class="form-control" name="price" placeholder="Цена" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-        <textarea class="form-control my-2" name="intro" aria-label="With textarea" rows="5" placeholder="Описание"></textarea>
-        <button type="submit" class="btn btn-success">Добавить</button>
-    </form>
-    <div class="col m-3 col-6-lg mx-3 p-3" style="border-radius: 15px;border: 2px solid #d5d5d5; ">
-        <table class="table table-hover ">
+    <div class="row m-0">
+        <div class="col-auto m-1">
+            <button type="button" class="col-auto btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#nameModal"  > <i class="bi bi-plus-square"></i> Добавить</button>
+        </div>
+    </div>
+<div class="row p-3">
+    <div class="col p-0" style="border-radius: 15px;border: 2px solid #d5d5d5; ">
+        <table class="table table-hover m-0">
             <thead>
-            <tr>
+            <tr class="">
                 <th scope="col">id</th>
                 <th scope="col">Имя</th>
-                <th scope="col">Описание</th>
+                <th class="text-center" scope="col">Описание</th>
                 <th scope="col">Цена</th>
+                <th> </th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             {% for el in data %}
-                <tr>
+                <tr class="">
                     <th scope="row">{{ el.id }}</th>
-                    <td>{{ el.name }}</td>
-                    <td>{{ el.intro }}</td>
-                    <td>{{ el.price }}</td>
-                    <td><a class="btn btn-danger" href="/delete/{{ el.id }}">Удалить</a></td>
+                    <td >{{ el.name }}</td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-light shadow" data-bs-toggle="modal" data-bs-target="#exampleModalToggle{{ el.id }}" data-bs-whatever="{{ el.intro }}">
+                            <i class="bi bi-info-lg"></i>
+                        </button>
+                    </td>
+                     <div class="modal fade" id="exampleModalToggle{{ el.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                         <div class="modal-dialog">
+                             <div class="modal-content" style="border-radius: 25px">
+                                 <div class="modal-header">
+                                     <h5 class="modal-title" id="exampleModalLabel">Сервисная информация</h5>
+                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                 </div>
+                                 <div class="modal-body" id="recipient-name">
+                                     <h4>Описание</h4>
+                                     <p class="text">{{ el.intro }}</p>
+                                 </div>
+                                 <div class="modal-footer"></div>
+                             </div>
+                         </div>
+                     </div>
+                    <td class="" >{{ el.price }} Руб.</td>
+                    <td><a class="col-auto btn btn-outline-danger" href="/delete/{{ el.id }}">Удалить</a></td>
+                    <td><button type="button" class="p-0 px-2 mx-2 btn btn-light shadow" style="background:rgb(232, 232, 232); border: none; position: relative; float:  right" data-bs-toggle="modal" data-bs-target="#edit_item{{ el.id }}Modal"><i class="bi bi-pencil"></i></button></td>
+                    <div class="modal fade" id="edit_item{{ el.id }}Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content" style="border-radius: 25px">
+                                <div class="modal-header">
+                                    <h3 class="modal-title" id="exampleModalLabel">Изменить товар</h3>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ url_for('edit_item', id=el.id) }}" class="col m-3" method="post">
+                                        <input type="text" class="form-control my-2" name="name" value="{{ el.name }}" placeholder="Имя" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                        <input type="number" class="form-control" name="price" placeholder="Цена" value="{{ el.price }}" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                        <textarea class="form-control my-2" name="intro" aria-label="With textarea" rows="5" placeholder="Описание">{{ el.intro }}</textarea>
+                                        <button type="submit" class="btn btn-success">Изменить</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
 </div>
+
+<div class="modal fade" id="nameModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="border-radius: 25px">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Добавить товар</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      <div class="modal-body">
+          <form action="{{ url_for('add_item') }}" class="col m-3" method="post">
+              <input type="text" class="form-control my-2" name="name" placeholder="Имя" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+              <input type="number" class="form-control" name="price" placeholder="Цена" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+              <textarea class="form-control my-2" name="intro" aria-label="With textarea" rows="5" placeholder="Описание"></textarea>
+              <button type="submit" class="btn btn-success">Добавить</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Модальное окно изменения товара -->
+
+
 {% endblock %}

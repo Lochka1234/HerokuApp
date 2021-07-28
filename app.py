@@ -188,6 +188,19 @@ def add_item():
         return fl.redirect(fl.url_for('admin_page', name='items'))
 
 
+@app.route('/profile/admin/items/edit_item/<id>', methods=['post'])
+@login_required
+@roles_required('admin')
+def edit_item(id):
+    if fl.request.method == 'POST':
+        item = Item.query.get(id)
+        item.name = fl.request.form.get('name')
+        item.price = fl.request.form.get('price')
+        item.intro = fl.request.form.get('intro')
+        db.session.commit()
+        return fl.redirect(fl.url_for('admin_page', name='items'))
+
+
 @app.route('/price')
 def price():
     item = Item.query.order_by(Item.id).all()
