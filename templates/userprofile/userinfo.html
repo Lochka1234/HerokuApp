@@ -66,7 +66,8 @@
     <div style="border: 2px solid #d5d5d5; border-radius: 15px;">
         <div class="p-2 m-2"><h5>История заказов</h5></div>
         <div class="m-2" style="max-height: 150px;overflow: auto;display: block; position: relative;">
-            <table class="mb-0 table table-hover">
+           {% if current_user.order %}
+                <table class="mb-0 table table-hover">
             <thead>
             <tr>
                 <th scope="col">Услуга</th>
@@ -89,6 +90,9 @@
             {% endfor %}
             </tbody>
             </table>
+           {% else %}
+               <h5 class="p-2">У вас отсутствуют заказы.</h5>
+           {% endif %}
         </div>
     </div>
     </div>

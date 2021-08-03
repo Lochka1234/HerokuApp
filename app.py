@@ -1,34 +1,16 @@
 import flask as fl
-import flask_sqlalchemy as sql
 import flask_security as fls
-from flask_security import login_required, roles_required
-from flask_login import current_user
+import flask_sqlalchemy as sql
 import wtforms as wtf
+from flask_login import current_user
+from flask_security import login_required, roles_required
 from wtforms.fields.html5 import TelField
+from cloudipsp import Api, Checkout
+import cloudipsp as ps
+from cloudipsp.helpers import check_data
 
 app = fl.Flask(__name__)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///shop.db'
-app.config['DEBUG'] = True
-app.config['FLASK_DEBUG'] = 1
-app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {"pool_pre_ping": True}
-
-app.config['SECURITY_PASSWORD_SALT'] = '176474375850775801120531136185633838018'
-app.config['SECRET_KEY'] = 'l4gmnDn-ifb9yaytCZgIGhDnWF6_d2tahmYgTDm1GEI'
-app.config['SECURITY_URL_PREFIX'] = '/'
-
-app.config['SECURITY_LOGIN_URL'] = '/login/'
-app.config['SECURITY_LOGOUT_URL'] = '/logout/'
-app.config['SECURITY_REGISTER_URL'] = '/register/'
-app.config['SECURITY_POST_LOGIN_VIEW'] = '/'
-app.config['SECURITY_POST_LOGOUT_VIEW'] = '/'
-app.config['SECURITY_POST_REGISTER_VIEW'] = '/'
-
-app.config['SECURITY_REGISTERABLE'] = True
-app.config['SECURITY_SEND_REGISTER_EMAIL'] = False
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECURITY_MSG_INVALID_PASSWORD'] = 'Неверный пароль', 'error'
-app.config['SECURITY_MSG_USER_DOES_NOT_EXIST'] = 'Такого пользователя не существует', 'error'
+app.config.from_object("config.Config")
 
 db = sql.SQLAlchemy(app)
 
@@ -235,7 +217,7 @@ def email_edit():
     return fl.redirect(fl.url_for('user_info'))
 
 
-@app.route('/nameModal', methods=['post','get'])
+@app.route('/nameModal', methods=['post', 'get'])
 @login_required
 def name_edit():
     if fl.request.method == 'POST':
@@ -272,14 +254,20 @@ def delete_user(id):
         return fl.render_template('userprofile/userinfo.html', error="Ищи себя в прошмандовках Санкт-Петербурга")
 
 
-@app.route('/price/buy/<id>')
+@app.route('/price/buy/<int:id>')
 @login_required
 def buy_item(id):
-    if current_user.is_authenticated:
-        user = user_datastore.get_user(current_user.get_id())
-        item = Item.query.get(id)
-        order = Order(name=item.name, intro=item.intro, price=item.price, user=user)
-        db.session.add(order)
-        db.session.commit()
-        return fl.redirect(fl.url_for('user_info'))
+    item = Item.query.get(id)
+    api = Api(merchant_id=1397120,
+              secret_key='test')
+    checkout = Checkout(api=api)
+    data = {
+        "currency": "RUB",
+        "amount": str(item.price) + '00'
+    }
+    order = ps.Order(api=api)
+    url = checkout.url(data).get('checkout_url')
+    return fl.redirect(url)
+
+
 
