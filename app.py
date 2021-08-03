@@ -6,6 +6,7 @@ from flask_login import current_user
 from flask_security import login_required, roles_required
 from wtforms.fields.html5 import TelField
 from cloudipsp import Api, Checkout
+import requests
 import cloudipsp as ps
 from cloudipsp.helpers import check_data
 
@@ -265,9 +266,13 @@ def buy_item(id):
         "currency": "RUB",
         "amount": str(item.price) + '00'
     }
-    order = ps.Order(api=api)
     url = checkout.url(data).get('checkout_url')
+    # if current_user.is_authenticated:
+    #     user = user_datastore.get_user(current_user.get_id())
+    #     item = Item.query.get(id)
+    #     order = Order(id=c name=item.name, intro=item.intro, price=item.price, user=user)
+    #     db.session.add(order)
+    #     db.session.commit()
     return fl.redirect(url)
-
 
 
