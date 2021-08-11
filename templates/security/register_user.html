@@ -10,6 +10,9 @@
             <img class="bg-dark p-2 px-3 shadow-lg" style="border-radius:20px" src="/static/logo_im/logo.png" width="150px" alt="False">
         </a>
                 <h1 class="text-center h2 my-4" style="font-family: 'Roboto', sans-serif;">Регистрация</h1>
+                <div class="mb-3">
+                    <a href="{{ url_for('index') }}" class="text-decoration-none" style="font-family: 'Roboto', sans-serif; font-size: 1.2rem; color: #aaaaaa "><i class="bi bi-arrow-left-short"></i>Вернуться на главную</a>
+                </div>
                 <div class="well">
                     <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
                         {{ register_user_form.hidden_tag() }}

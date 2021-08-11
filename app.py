@@ -6,9 +6,6 @@ from flask_login import current_user
 from flask_security import login_required, roles_required
 from wtforms.fields.html5 import TelField
 from cloudipsp import Api, Checkout
-import requests
-import cloudipsp as ps
-from cloudipsp.helpers import check_data
 
 app = fl.Flask(__name__)
 app.config.from_object("config.Config")
@@ -145,14 +142,9 @@ def admin_page(name):
     if name == 'users':
         users = User.query.order_by(User.id).all()
         return fl.render_template('userprofile/admin/users_admin.html', data=users)
-
-    if name == 'items':
+    elif name == 'items':
         item = Item.query.order_by(Item.id).all()
         return fl.render_template('userprofile/admin/item_admin.html', data=item)
-
-    if name == '?':
-        pass
-
     else:
         return fl.redirect('/')
 
@@ -273,6 +265,7 @@ def buy_item(id):
     #     order = Order(id=c name=item.name, intro=item.intro, price=item.price, user=user)
     #     db.session.add(order)
     #     db.session.commit()
-    return fl.redirect(url)
+    return str(checkout.url(data))
+    # return fl.redirect(url)
 
 
